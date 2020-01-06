@@ -60,11 +60,14 @@ repositories {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
-    compile wpi.deps.wpilib()
-    compile wpi.deps.vendor.java()
-    implementation "com.rambots4571:rampage:2020.1.1"
+    implementation wpi.deps.wpilib()
+    implementation "com.rambots4571:rampage:2020.+"
+    nativeZip wpi.deps.wpilibJni(wpi.platforms.roborio)
+    nativeDesktopZip wpi.deps.wpilibJni(wpi.platforms.desktop)
+    implementation wpi.deps.vendor.java()
     nativeZip wpi.deps.vendor.jni(wpi.platforms.roborio)
     nativeDesktopZip wpi.deps.vendor.jni(wpi.platforms.desktop)
+    simulation wpi.deps.sim.gui(wpi.platforms.desktop, false)
 }
 
 jar {
