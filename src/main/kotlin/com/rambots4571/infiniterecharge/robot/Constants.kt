@@ -1,8 +1,9 @@
 package com.rambots4571.infiniterecharge.robot
 
 object Constants {
-    object Drivetrain {
-        const val leftTopMotor = 1
+    object Controller {
+        const val leftStick = 0
+        const val rightStick = 1
+        const val gamepad = 2
     }
-
 }

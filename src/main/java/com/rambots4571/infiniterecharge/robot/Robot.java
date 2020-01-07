@@ -4,8 +4,10 @@ import com.rambots4571.rampage.joystick.DriveStick;
 import edu.wpi.first.wpilibj.TimedRobot;
 
 public class Robot extends TimedRobot {
-    public final static DriveStick leftStick = new DriveStick(0);
-    public final static DriveStick rightStick = new DriveStick(1);
+    public final static DriveStick leftStick = new DriveStick(
+            Constants.Controller.leftStick);
+    public final static DriveStick rightStick = new DriveStick(
+            Constants.Controller.rightStick);
 
     @Override
     public void robotInit() {}
