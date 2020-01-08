@@ -1,6 +1,6 @@
 package com.rambots4571.infiniterecharge.robot.subsystem;
 
-import edu.wpi.first.wpilibj2.command.Subsystem;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class Drivetrain implements Subsystem {
+public class Drivetrain extends SubsystemBase {
 }
