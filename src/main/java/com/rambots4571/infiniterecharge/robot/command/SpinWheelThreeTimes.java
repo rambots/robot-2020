@@ -1,14 +1,14 @@
 package com.rambots4571.infiniterecharge.robot.command;
 
+import com.rambots4571.infiniterecharge.robot.component.ColorTarget;
 import com.rambots4571.infiniterecharge.robot.subsystem.Arm;
 import com.rambots4571.rampage.function.SwitchAction;
-import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class SpinWheelThreeTimes extends CommandBase {
     private Arm arm = Arm.getInstance();
-    private Color targetColor;
-    private SwitchAction<Color> color;
+    private ColorTarget colorTarget;
+    private SwitchAction<ColorTarget> color;
     private int counter;
 
     public SpinWheelThreeTimes() {
@@ -18,13 +18,13 @@ public class SpinWheelThreeTimes extends CommandBase {
 
     @Override
     public void initialize() {
-        targetColor = arm.getColor();
+        colorTarget = arm.getColor();
     }
 
     @Override
     public void execute() {
         color.whenDiff(() -> {
-            if (arm.getColor() == targetColor) counter++;
+            if (arm.getColor() == colorTarget) counter++;
         });
         arm.setWheelSpinner(0.5);
     }

@@ -1,24 +1,31 @@
 package com.rambots4571.infiniterecharge.robot.subsystem;
 
 import com.rambots4571.infiniterecharge.robot.Constants;
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel;
-import com.revrobotics.ColorSensorV3;
+import com.rambots4571.infiniterecharge.robot.component.ColorTarget;
+import com.revrobotics.*;
 import edu.wpi.first.wpilibj.I2C;
-import edu.wpi.first.wpilibj.smartdashboard.SendableBuilder;
 import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Arm extends SubsystemBase {
     private static Arm instance;
-    private ColorSensorV3 colorSensor;
     private CANSparkMax wheelSpinner;
+    private ColorSensorV3 colorSensor;
+    private Color blue = ColorMatch.makeColor(0, 0, 0);
+    private Color green = ColorMatch.makeColor(0, 0, 0);
+    private Color red = ColorMatch.makeColor(0, 0, 0);
+    private Color yellow = ColorMatch.makeColor(0, 0, 0);
+    private ColorMatch colorMatcher;
 
     private Arm() {
         colorSensor = new ColorSensorV3(I2C.Port.kOnboard);
         wheelSpinner = new CANSparkMax(
                 Constants.Arm.wheelMotor,
                 CANSparkMaxLowLevel.MotorType.kBrushless);
+        colorMatcher.addColorMatch(blue);
+        colorMatcher.addColorMatch(green);
+        colorMatcher.addColorMatch(red);
+        colorMatcher.addColorMatch(yellow);
     }
 
     public static Arm getInstance() {
@@ -29,17 +36,17 @@ public class Arm extends SubsystemBase {
         return instance;
     }
 
-    @Override
-    public void initSendable(SendableBuilder builder) {
-        super.initSendable(builder);
-        builder.addStringProperty("Color", getColor()::toString, null);
-    }
-
     public void setWheelSpinner(double power) {
         wheelSpinner.set(power);
     }
 
-    public Color getColor() {
-        return colorSensor.getColor();
+    public ColorTarget getColor() {
+        ColorMatchResult match = colorMatcher.matchClosestColor(
+                colorSensor.getColor());
+        if (match.color == blue) return ColorTarget.Blue;
+        else if (match.color == green) return ColorTarget.Green;
+        else if (match.color == red) return ColorTarget.Red;
+        else if (match.color == yellow) return ColorTarget.Yellow;
+        else return ColorTarget.Unknown;
     }
 }
