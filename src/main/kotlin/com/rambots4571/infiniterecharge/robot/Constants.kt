@@ -6,4 +6,8 @@ object Constants {
         const val rightStick = 1
         const val gamepad = 2
     }
+
+    object Arm {
+        const val wheelMotor = 0
+    }
 }
