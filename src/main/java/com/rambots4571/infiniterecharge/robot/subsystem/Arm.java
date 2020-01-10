@@ -11,6 +11,8 @@ public class Arm extends SubsystemBase {
     private static Arm instance;
     private CANSparkMax wheelSpinner;
     private ColorSensorV3 colorSensor;
+    // TODO: find the values of the colors on the wheel using the read colors
+    //  command
     private Color blue = ColorMatch.makeColor(0, 0, 0);
     private Color green = ColorMatch.makeColor(0, 0, 0);
     private Color red = ColorMatch.makeColor(0, 0, 0);
@@ -22,6 +24,7 @@ public class Arm extends SubsystemBase {
         wheelSpinner = new CANSparkMax(
                 Constants.Arm.wheelMotor,
                 CANSparkMaxLowLevel.MotorType.kBrushless);
+        colorMatcher = new ColorMatch();
         colorMatcher.addColorMatch(blue);
         colorMatcher.addColorMatch(green);
         colorMatcher.addColorMatch(red);
