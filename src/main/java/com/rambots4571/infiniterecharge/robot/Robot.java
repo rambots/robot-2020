@@ -4,6 +4,7 @@ import com.rambots4571.infiniterecharge.robot.command.SpinWheelThreeTimes;
 import com.rambots4571.rampage.joystick.DriveStick;
 import com.rambots4571.rampage.joystick.Gamepad;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
 public class Robot extends TimedRobot {
     public final static DriveStick leftStick = new DriveStick(
@@ -29,10 +30,12 @@ public class Robot extends TimedRobot {
     public void autonomousPeriodic() {}
 
     @Override
-    public void teleopInit() {}
+    public void teleopInit() {
+        gamepad.getRightBumper().whenPressed(new SpinWheelThreeTimes());
+    }
 
     @Override
     public void teleopPeriodic() {
-        gamepad.getRightBumper().whenPressed(new SpinWheelThreeTimes());
+        CommandScheduler.getInstance().run();
     }
 }
