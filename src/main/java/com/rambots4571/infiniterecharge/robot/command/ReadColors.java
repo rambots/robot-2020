@@ -22,6 +22,8 @@ public class ReadColors extends CommandBase {
         SmartDashboard.putNumber("Red", color.red);
         SmartDashboard.putNumber("Green", color.green);
         SmartDashboard.putNumber("Blue", color.blue);
+        SmartDashboard.putString("Color Name", arm.getColor().toString());
+        SmartDashboard.putNumber("confidence", arm.getConfidence());
     }
 
     @Override
