@@ -1,5 +1,6 @@
 package com.rambots4571.infiniterecharge.robot.subsystem;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.rambots4571.infiniterecharge.robot.Constants;
 import com.rambots4571.infiniterecharge.robot.component.ColorTarget;
 import com.revrobotics.*;
@@ -9,7 +10,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Arm extends SubsystemBase {
     private static Arm instance;
-    private CANSparkMax wheelSpinner;
+    private WPI_TalonSRX wheelSpinner;
     private ColorSensorV3 colorSensor;
     // TODO: find the values of the colors on the wheel using the read colors
     //  command
@@ -21,9 +22,7 @@ public class Arm extends SubsystemBase {
 
     private Arm() {
         colorSensor = new ColorSensorV3(I2C.Port.kOnboard);
-        wheelSpinner = new CANSparkMax(
-                Constants.Arm.wheelMotor,
-                CANSparkMaxLowLevel.MotorType.kBrushless);
+        wheelSpinner = new WPI_TalonSRX(Constants.Arm.wheelMotor);
         colorMatcher = new ColorMatch();
         colorMatcher.addColorMatch(blue);
         colorMatcher.addColorMatch(green);
@@ -51,5 +50,9 @@ public class Arm extends SubsystemBase {
         else if (match.color == red) return ColorTarget.Red;
         else if (match.color == yellow) return ColorTarget.Yellow;
         else return ColorTarget.Unknown;
+    }
+
+    public Color getDetectedColor() {
+        return colorSensor.getColor();
     }
 }

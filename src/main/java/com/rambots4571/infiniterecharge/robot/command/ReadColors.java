@@ -18,7 +18,7 @@ public class ReadColors extends CommandBase {
 
     @Override
     public void execute() {
-        Color color = arm.getColor();
+        Color color = arm.getDetectedColor();
         SmartDashboard.putNumber("Red", color.red);
         SmartDashboard.putNumber("Green", color.green);
         SmartDashboard.putNumber("Blue", color.blue);
