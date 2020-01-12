@@ -23,7 +23,7 @@ public class SpinWheelThreeTimes extends CommandBase {
 
     @Override
     public void execute() {
-        color.whenDiff(() -> {
+        color.whenActive(() -> {
             if (arm.getColor() == colorTarget) counter++;
         });
         arm.setWheelSpinner(0.5);
