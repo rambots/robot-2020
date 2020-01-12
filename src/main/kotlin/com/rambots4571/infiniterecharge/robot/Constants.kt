@@ -10,4 +10,13 @@ object Constants {
     object Arm {
         const val wheelMotor = 0
     }
+
+    object Drivetrain {
+        const val leftMaster = 0
+        const val leftFollower1 = 0
+        const val leftFollower2 = 0
+        const val rightMaster = 0
+        const val rightFollower1 = 0
+        const val rightFollower2 = 0
+    }
 }
