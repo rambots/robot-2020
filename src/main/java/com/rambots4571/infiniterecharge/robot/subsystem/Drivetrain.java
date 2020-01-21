@@ -28,6 +28,7 @@ public class Drivetrain extends SubsystemBase {
 
         rightFollowerOne.follow(rightMaster);
         rightFollowerTwo.follow(rightMaster);
+        rightMaster.setInverted(true);
 
     }
  public void setSpeed( double right, double left ) {
