@@ -5,7 +5,10 @@ import com.revrobotics.CANSparkMaxLowLevel;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.revrobotics.CANSparkMax;
 
+import java.awt.*;
+
 public class Drivetrain extends SubsystemBase {
+    private static Drivetrain instance;
 
     private CANSparkMax leftMaster =
             new CANSparkMax(Constants.Drive.leftMaster,
@@ -15,7 +18,7 @@ public class Drivetrain extends SubsystemBase {
             new CANSparkMax(Constants.Drive.rightMaster,
                     CANSparkMaxLowLevel.MotorType.kBrushless);
 
-    public Drivetrain() {
+    private Drivetrain() {
         CANSparkMax leftFollowerOne =
                 new CANSparkMax(Constants.Drive.leftFollowerOne,
                         CANSparkMaxLowLevel.MotorType.kBrushless);
@@ -35,6 +38,13 @@ public class Drivetrain extends SubsystemBase {
         rightFollowerTwo.follow(rightMaster);
 
         rightMaster.setInverted(true);
+    }
+
+    public static Drivetrain getInstance() {
+        synchronized (Drivetrain.class) {
+            if (instance == null) instance = new Drivetrain();
+        }
+        return instance;
     }
 
     public void setSpeed(double right, double left) {

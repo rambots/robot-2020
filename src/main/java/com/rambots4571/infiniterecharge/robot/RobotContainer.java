@@ -12,5 +12,4 @@ public class RobotContainer {
     public final static Gamepad gamepad = new Gamepad(
             Constants.Controller.gamepad);
 
-    public static Drivetrain drivetrain  = new Drivetrain ();
 }
