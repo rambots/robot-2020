@@ -21,6 +21,7 @@ public class Drivetrain extends SubsystemBase {
         rightFollowerOne.follow(rightMaster);
         CANSparkMax rightFollowerTwo = new CANSparkMax(Constants.Drive.rightFollowerTwo, CANSparkMaxLowLevel.MotorType.kBrushless);
         rightFollowerTwo.follow(rightMaster);
+        rightMaster.setInverted(true);
 
         rightMaster.setInverted(true);
     }
@@ -29,7 +30,7 @@ public class Drivetrain extends SubsystemBase {
         leftMaster.set(left); //put the speed in the ()
         rightMaster.set(right);//put the speed in the ()
     }
-
+    
     public void stop() {
         setSpeed(0, 0);
     }
