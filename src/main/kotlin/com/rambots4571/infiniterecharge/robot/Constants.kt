@@ -11,12 +11,13 @@ object Constants {
         const val wheelMotor = 0
     }
 
-    object Drivetrain {
+    object Drive {
         const val leftMaster = 0
-        const val leftFollower1 = 0
-        const val leftFollower2 = 0
-        const val rightMaster = 0
-        const val rightFollower1 = 0
-        const val rightFollower2 = 0
+        const val leftFollowerOne = 1
+        const val leftFollowerTwo = 2
+
+        const val rightMaster = 4
+        const val rightFollowerOne = 5
+        const val rightFollowerTwo = 6
     }
 }
