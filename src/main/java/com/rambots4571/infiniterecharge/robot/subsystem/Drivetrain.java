@@ -33,7 +33,6 @@ public class Drivetrain extends SubsystemBase {
                 new CANSparkMax(Constants.Drive.rightFollowerTwo,
                         CANSparkMaxLowLevel.MotorType.kBrushless);
         rightFollowerTwo.follow(rightMaster);
-        rightMaster.setInverted(true);
 
         rightMaster.setInverted(true);
     }
