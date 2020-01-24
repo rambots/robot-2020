@@ -7,35 +7,30 @@ import com.revrobotics.CANSparkMax;
 
 public class Drivetrain extends SubsystemBase {
 
-    CANSparkMax leftMaster = new CANSparkMax(Constants.Drive.leftMaster, CANSparkMaxLowLevel.MotorType.kBrushless);
+    private CANSparkMax leftMaster = new CANSparkMax(Constants.Drive.leftMaster, CANSparkMaxLowLevel.MotorType.kBrushless);
 
-    CANSparkMax leftFollowerOne = new CANSparkMax(Constants.Drive.leftFollowerOne, CANSparkMaxLowLevel.MotorType.kBrushless);
+    private CANSparkMax rightMaster = new CANSparkMax(Constants.Drive.rightMaster, CANSparkMaxLowLevel.MotorType.kBrushless);
 
-    CANSparkMax leftFollowerTwo = new CANSparkMax(Constants.Drive.leftFollowerTwo, CANSparkMaxLowLevel.MotorType.kBrushless);
-
-    CANSparkMax rightMaster = new CANSparkMax(Constants.Drive.rightMaster, CANSparkMaxLowLevel.MotorType.kBrushless);
-
-    CANSparkMax rightFollowerOne =
-            new CANSparkMax(Constants.Drive.rightFollowerOne, CANSparkMaxLowLevel.MotorType.kBrushless);
-
-    CANSparkMax rightFollowerTwo =
-            new CANSparkMax(Constants.Drive.rightFollowerTwo, CANSparkMaxLowLevel.MotorType.kBrushless);
-
-    private Drivetrain () {
-
+    public Drivetrain() {
+        CANSparkMax leftFollowerOne = new CANSparkMax(Constants.Drive.leftFollowerOne, CANSparkMaxLowLevel.MotorType.kBrushless);
         leftFollowerOne.follow(leftMaster);
+        CANSparkMax leftFollowerTwo = new CANSparkMax(Constants.Drive.leftFollowerTwo, CANSparkMaxLowLevel.MotorType.kBrushless);
         leftFollowerTwo.follow(leftMaster);
 
+        CANSparkMax rightFollowerOne = new CANSparkMax(Constants.Drive.rightFollowerOne, CANSparkMaxLowLevel.MotorType.kBrushless);
         rightFollowerOne.follow(rightMaster);
+        CANSparkMax rightFollowerTwo = new CANSparkMax(Constants.Drive.rightFollowerTwo, CANSparkMaxLowLevel.MotorType.kBrushless);
         rightFollowerTwo.follow(rightMaster);
 
-    }
- public void setSpeed( double right, double left ) {
-        leftMaster . set( left); //put the speed in the ()
-        rightMaster . set(right);//put the speed in the ()
-
-
+        rightMaster.setInverted(true);
     }
 
+    public void setSpeed(double right, double left) {
+        leftMaster.set(left); //put the speed in the ()
+        rightMaster.set(right);//put the speed in the ()
+    }
 
+    public void stop() {
+        setSpeed(0, 0);
+    }
 }
