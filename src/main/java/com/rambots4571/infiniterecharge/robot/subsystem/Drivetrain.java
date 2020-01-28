@@ -4,6 +4,8 @@ import com.rambots4571.infiniterecharge.robot.Constants;
 import com.revrobotics.CANSparkMaxLowLevel;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANError;
+import com.revrobotics.CANSparkMax.IdleMode;
 
 import java.awt.*;
 
@@ -48,8 +50,8 @@ public class Drivetrain extends SubsystemBase {
     }
 
     public void setSpeed(double right, double left) {
-        leftMaster.set(left); //put the speed in the ()
-        rightMaster.set(right);//put the speed in the ()
+        leftMaster.set(left);
+        rightMaster.set(right);
     }
 
     public void stop() {
