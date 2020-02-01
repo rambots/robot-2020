@@ -6,4 +6,9 @@ object Constants {
         const val rightStick = 1
         const val gamepad = 2
     }
+
+    object Pneumatics {
+        const val pistonForward = 0
+        const val pistonReverse = 1
+    }
 }
