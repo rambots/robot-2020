@@ -1,5 +1,6 @@
 package com.rambots4571.infiniterecharge.robot.subsystem;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.rambots4571.infiniterecharge.robot.Constants;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -12,6 +13,7 @@ public class Pneumatics extends SubsystemBase {
         piston = new DoubleSolenoid(
                 Constants.Pneumatics.pistonForward,
                 Constants.Pneumatics.pistonReverse);
+        WPI_TalonSRX talon = new WPI_TalonSRX(4);
     }
 
     public static Pneumatics getInstance() {
