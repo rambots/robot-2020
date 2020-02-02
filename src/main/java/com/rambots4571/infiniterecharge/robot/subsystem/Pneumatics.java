@@ -37,7 +37,7 @@ public class Pneumatics extends SubsystemBase {
     }
 
     public DoubleSolenoid.Value getCurrentValue() {
-        return piston.get();
+        return piston.getCurrentValue();
     }
 
     public void togglePiston() {
