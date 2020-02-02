@@ -27,7 +27,8 @@ public class Robot extends TimedRobot {
 
     @Override
     public void teleopInit() {
-        RobotContainer.stick.getButton1().whenPressed(Pneumatics.getInstance()::toggle);
+        RobotContainer.stick.getButton1().whenPressed(
+                Pneumatics.getInstance()::togglePiston);
     }
 
     @Override

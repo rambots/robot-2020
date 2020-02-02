@@ -1,6 +1,5 @@
 package com.rambots4571.infiniterecharge.robot;
 
-import com.rambots4571.infiniterecharge.robot.subsystem.Pneumatics;
 import com.rambots4571.rampage.joystick.DriveStick;
 
 public class RobotContainer {
