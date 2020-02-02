@@ -11,6 +11,5 @@ public class RobotContainer {
     }
 
     public void configureBindings() {
-        stick.getButton1().whenPressed(Pneumatics.getInstance()::toggle);
     }
 }

@@ -8,6 +8,7 @@ object Constants {
     }
 
     object Pneumatics {
+        const val compressor = 0
         const val pistonForward = 0
         const val pistonReverse = 1
     }

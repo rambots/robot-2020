@@ -69,14 +69,14 @@ dependencies {
     nativeZip wpi.deps.vendor.jni(wpi.platforms.roborio)
     nativeDesktopZip wpi.deps.vendor.jni(wpi.platforms.desktop)
 
-    implementation "com.rambots4571:rampage:2020.+"
+    implementation "com.rambots4571:rampage:2020.1.2"
 
     simulation wpi.deps.sim.gui(wpi.platforms.desktop, false)
 }
 
 jar {
     from {
-        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
     }
     manifest edu.wpi.first.gradlerio.GradleRIOPlugin.javaManifest(MAIN_CLASS)
 }
