@@ -36,8 +36,8 @@ public class Pneumatics extends SubsystemBase {
         piston.set(DoubleSolenoid.Value.kForward);
     }
 
-    public DoubleSolenoid.Value getCurrentValue() {
-        return piston.getCurrentValue();
+    public DoubleSolenoid.Value getPistonValue() {
+        return piston.get();
     }
 
     public void togglePiston() {
