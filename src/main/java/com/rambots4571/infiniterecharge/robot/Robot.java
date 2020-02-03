@@ -10,7 +10,6 @@ public class Robot extends TimedRobot {
     @Override
     public void robotInit() {
         container = new RobotContainer();
-        Pneumatics.getInstance();
     }
 
     @Override
@@ -27,8 +26,10 @@ public class Robot extends TimedRobot {
 
     @Override
     public void teleopInit() {
-        RobotContainer.stick.getButton1().whenPressed(
-                Pneumatics.getInstance()::togglePiston);
+        RobotContainer.stick.getButton5().whenPressed(
+                Pneumatics.getInstance()::pushIn);
+        RobotContainer.stick.getButton6().whenPressed(
+                Pneumatics.getInstance()::pushOut);
     }
 
     @Override
