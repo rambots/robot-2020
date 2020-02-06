@@ -8,29 +8,33 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 public class SpinWheelThreeTimes extends CommandBase {
     private Arm arm = Arm.getInstance();
     private ColorTarget colorTarget;
-    private SwitchAction<ColorTarget> color;
     private int counter;
 
     public SpinWheelThreeTimes() {
         addRequirements(arm);
-        color = new SwitchAction<>(arm::getColor);
     }
 
     @Override
     public void initialize() {
+        // storing the color the arm first sees
         colorTarget = arm.getColor();
+        // this will increase the counter every time the color sensor detects
+        // the starting color
+        System.out.println("initial color: " + colorTarget);
+        (new SwitchAction<>(arm::getColor)).whenActive(() -> {
+            if (arm.getColor() == colorTarget) counter++;
+            System.out.println("color: " + arm.getColor());
+        });
     }
 
     @Override
     public void execute() {
-        color.whenActive(() -> {
-            if (arm.getColor() == colorTarget) counter++;
-        });
-        arm.setWheelSpinner(0.5);
+        arm.setWheelSpinner(1.0);
     }
 
     @Override
     public boolean isFinished() {
+        // automatically stop the arm once the counter hits 7
         return counter == 7;
     }
 
