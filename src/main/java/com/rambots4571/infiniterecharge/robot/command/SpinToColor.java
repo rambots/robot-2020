@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class SpinToColor extends CommandBase {
     private Arm arm = Arm.getInstance();
-    private ColorTarget color;
+    private ColorTarget target;
     private boolean canRun = false;
 
     public SpinToColor() {
@@ -20,22 +20,22 @@ public class SpinToColor extends CommandBase {
         if (gameData.length() > 0) {
             switch (gameData.charAt(0)) {
                 case 'B':
-                    color = ColorTarget.Blue;
+                    target = ColorTarget.Blue;
                     break;
                 case 'G':
-                    color = ColorTarget.Green;
+                    target = ColorTarget.Green;
                     break;
                 case 'R':
-                    color = ColorTarget.Red;
+                    target = ColorTarget.Red;
                     break;
                 case 'Y':
-                    color = ColorTarget.Yellow;
+                    target = ColorTarget.Yellow;
                     break;
                 default:
-                    color = ColorTarget.Unknown;
+                    target = ColorTarget.Unknown;
                     break;
             }
-            if (color != ColorTarget.Unknown) canRun = true;
+            if (target != ColorTarget.Unknown) canRun = true;
         } else {
             DriverStation.reportWarning("Game data not set", false);
         }
@@ -48,7 +48,7 @@ public class SpinToColor extends CommandBase {
 
     @Override
     public boolean isFinished() {
-        return canRun == (arm.getColor() == color.getComplement());
+        return canRun == (arm.getColor() == target.getComplement());
     }
 
     @Override
