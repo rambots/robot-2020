@@ -1,6 +1,8 @@
 package com.rambots4571.infiniterecharge.robot;
 
 import com.rambots4571.infiniterecharge.robot.command.ReadColors;
+import com.rambots4571.infiniterecharge.robot.command.SpinToColor;
+import com.rambots4571.infiniterecharge.robot.command.SpinWheelThreeTimes;
 import com.rambots4571.rampage.joystick.DriveStick;
 import com.rambots4571.rampage.joystick.Gamepad;
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -32,6 +34,8 @@ public class Robot extends TimedRobot {
     @Override
     public void teleopInit() {
         (new ReadColors()).schedule();
+        leftStick.getButton5().whenPressed(new SpinWheelThreeTimes(), false);
+        leftStick.getButton6().whenPressed(new SpinToColor(), false);
     }
 
     @Override
