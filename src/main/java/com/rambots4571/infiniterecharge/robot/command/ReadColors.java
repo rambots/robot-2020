@@ -13,26 +13,17 @@ public class ReadColors extends CommandBase {
     }
 
     @Override
-    public void initialize() {
-    }
-
-    @Override
     public void execute() {
         Color color = arm.getDetectedColor();
-        SmartDashboard.putNumber("Red", color.red);
-        SmartDashboard.putNumber("Green", color.green);
-        SmartDashboard.putNumber("Blue", color.blue);
-        SmartDashboard.putString("Color Name", arm.getColor().toString());
+        SmartDashboard.putString(
+                "raw rgb", String.format("rgb(%.3f, %.3f, %.3f)", color.red,
+                                         color.green, color.blue));
+        SmartDashboard.putString("Color Name?", arm.getColor().toString());
         SmartDashboard.putNumber("confidence", arm.getConfidence());
     }
 
     @Override
     public boolean isFinished() {
         return false;
-    }
-
-    @Override
-    public void end(boolean interrupted) {
-
     }
 }
