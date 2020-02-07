@@ -11,5 +11,6 @@ object Constants {
         const val compressor = 0
         const val pistonForward = 0
         const val pistonReverse = 1
+        const val singlePiston = 2
     }
 }

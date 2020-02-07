@@ -32,8 +32,8 @@ public class Robot extends TimedRobot {
         RobotContainer.stick.getButton1().whenPressed(
                 Pneumatics.getInstance()::togglePiston);
         RobotContainer.stick.getButton6().toggle(
-                Pneumatics.getInstance()::pushOut,
-                Pneumatics.getInstance()::pushIn);
+                Pneumatics.getInstance()::pushOutPiston,
+                Pneumatics.getInstance()::pushInPiston);
     }
 
     @Override
