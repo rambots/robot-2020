@@ -6,9 +6,12 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
 public class Robot extends TimedRobot {
+    private RobotContainer container;
 
     @Override
-    public void robotInit() {}
+    public void robotInit() {
+        container = new RobotContainer();
+    }
 
     @Override
     public void disabledInit() {
@@ -29,15 +32,7 @@ public class Robot extends TimedRobot {
 
     @Override
     public void teleopInit() {
-        RobotContainer.leftStick.getButton6().toggle(
-                () -> Indexer.getInstance().setIntake(0.5),
-                Indexer.getInstance()::stopIntake);
-        RobotContainer.leftStick.getButton4().toggle(
-                () -> Indexer.getInstance().setIntake(-0.5),
-                Indexer.getInstance()::stopIntake);
-        RobotContainer.leftStick.getButton5().toggle(
-                () -> Indexer.getInstance().setConveyor(0.5),
-                Indexer.getInstance()::stopConveyor);
+        container.initializeButtonBindings();
     }
 
     @Override
