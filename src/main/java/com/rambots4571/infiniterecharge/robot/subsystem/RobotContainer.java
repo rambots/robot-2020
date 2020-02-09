@@ -12,11 +12,11 @@ public class RobotContainer {
     public void initializeButtonBindings() {
         leftStick.getButton6().toggle(
                 () -> Indexer.getInstance().setIntake(0.5),
-                Indexer.getInstance()::stopIntake);
+                Indexer.getInstance()::stopIntake, Indexer.getInstance());
 
         leftStick.getButton4().toggle(
                 () -> Indexer.getInstance().setIntake(-0.5),
-                Indexer.getInstance()::stopIntake);
+                Indexer.getInstance()::stopIntake, Indexer.getInstance());
 
         leftStick.getButton5().toggle(
                 () -> Indexer.getInstance().setConveyor(0.5),
