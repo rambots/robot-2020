@@ -6,4 +6,9 @@ object Constants {
         const val rightStick = 1
         const val gamepad = 2
     }
+
+    object Indexer {
+        const val intakeMotor = 4
+        const val conveyorMotor = 1
+    }
 }
