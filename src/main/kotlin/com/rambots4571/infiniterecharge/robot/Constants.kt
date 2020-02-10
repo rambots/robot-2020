@@ -12,9 +12,9 @@ object Constants {
     }
 
     object Drive {
-        const val leftMaster = 0
-        const val leftFollowerOne = 1
-        const val leftFollowerTwo = 2
+        const val leftMaster = 1
+        const val leftFollowerOne = 2
+        const val leftFollowerTwo = 3
 
         const val rightMaster = 4
         const val rightFollowerOne = 5

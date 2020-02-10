@@ -8,23 +8,28 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 public class Robot extends TimedRobot {
 
     @Override
-    public void robotInit() {}
+    public void robotInit() {
+    }
 
     @Override
-    public void disabledInit() {}
+    public void disabledInit() {
+    }
 
     @Override
-    public void disabledPeriodic() {}
+    public void disabledPeriodic() {
+    }
 
     @Override
-    public void autonomousInit() {}
+    public void autonomousInit() {
+    }
 
     @Override
-    public void autonomousPeriodic() {}
+    public void autonomousPeriodic() {
+    }
 
     @Override
     public void teleopInit() {
-        (new ReadColors()).schedule();
+//        (new ReadColors()).schedule();
         (new TeleOPDrive()).schedule();
     }
 
