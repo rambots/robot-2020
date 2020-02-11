@@ -51,7 +51,7 @@ public class Drivetrain extends SubsystemBase {
         return instance;
     }
 
-    public void setSpeed(double right, double left) {
+    public void setSpeed(double left, double right) {
         leftMaster.set(left);
         rightMaster.set(right);
     }

@@ -20,16 +20,4 @@ object Constants {
         const val rightFollowerOne = 5
         const val rightFollowerTwo = 6
     }
-
-    object Intake{
-        const val IntakeMotor = 7
-    }
-
-    object Climber{
-        const val ClimberMotor = 8
-        const val HookMotor = 9
-    }
-    object Shooter {
-        const val ShooterMotor = 10
-    }
 }
