@@ -7,6 +7,7 @@ import com.revrobotics.ColorMatch;
 import com.revrobotics.ColorMatchResult;
 import com.revrobotics.ColorSensorV3;
 import edu.wpi.first.wpilibj.I2C;
+import edu.wpi.first.wpilibj.smartdashboard.SendableBuilder;
 import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -38,6 +39,17 @@ public class Arm extends SubsystemBase {
                 instance = new Arm();
             }
         return instance;
+    }
+
+    @Override
+    public void initSendable(SendableBuilder builder) {
+        super.initSendable(builder);
+        Color color = getDetectedColor();
+        builder.addStringProperty("RGB", () -> String
+                .format("rgb(%.3f, %.3f, %.3f)", color.red,
+                        color.green, color.blue), null);
+        builder.addStringProperty("Detected Color", getColor()::toString, null);
+        builder.addDoubleProperty("Confidence", this::getConfidence, null);
     }
 
     public void setWheelSpinner(double power) {
