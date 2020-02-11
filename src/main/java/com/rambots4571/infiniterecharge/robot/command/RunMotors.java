@@ -39,5 +39,6 @@ public class RunMotors extends CommandBase {
     @Override
     public void end(boolean interrupted) {
         Drivetrain.getInstance().stop();
+        timer.stop();
     }
 }
