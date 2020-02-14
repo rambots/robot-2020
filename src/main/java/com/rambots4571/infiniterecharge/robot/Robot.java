@@ -1,11 +1,10 @@
 package com.rambots4571.infiniterecharge.robot;
 
-import com.rambots4571.infiniterecharge.robot.subsystem.Pneumatics;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
 public class Robot extends TimedRobot {
-    RobotContainer container;
+    private RobotContainer container;
 
     @Override
     public void robotInit() {
@@ -16,7 +15,9 @@ public class Robot extends TimedRobot {
     public void robotPeriodic() {}
 
     @Override
-    public void disabledInit() {}
+    public void disabledInit() {
+        CommandScheduler.getInstance().cancelAll();
+    }
 
     @Override
     public void disabledPeriodic() {}
@@ -25,15 +26,13 @@ public class Robot extends TimedRobot {
     public void autonomousInit() {}
 
     @Override
-    public void autonomousPeriodic() {}
+    public void autonomousPeriodic() {
+        CommandScheduler.getInstance().run();
+    }
 
     @Override
     public void teleopInit() {
-        RobotContainer.stick.getButton1().whenPressed(
-                Pneumatics.getInstance()::togglePiston);
-        RobotContainer.stick.getButton6().toggle(
-                Pneumatics.getInstance()::pushOutPiston,
-                Pneumatics.getInstance()::pushInPiston);
+        container.initTeleopCommands();
     }
 
     @Override
