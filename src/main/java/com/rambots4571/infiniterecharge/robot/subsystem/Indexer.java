@@ -34,7 +34,7 @@ public class Indexer extends SubsystemBase {
     public void setFeeder(double speed) {
         feederMotor.set(speed);
     }
-    
+
     public void stopConveyor() {
         setConveyor(0);
     }
