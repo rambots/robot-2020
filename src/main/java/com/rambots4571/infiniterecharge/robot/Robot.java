@@ -16,17 +16,12 @@ public class Robot extends TimedRobot {
 
     @Override
     public void disabledInit() {
-        CommandScheduler.getInstance().clearButtons();
         CommandScheduler.getInstance().cancelAll();
     }
 
     @Override
     public void disabledPeriodic() {
         CommandScheduler.getInstance().run();
-    }
-
-    @Override
-    public void autonomousInit() {
     }
 
     @Override
@@ -37,7 +32,6 @@ public class Robot extends TimedRobot {
     @Override
     public void teleopInit() {
         container.initTeleopCommands();
-        container.configureButtonBindings();
     }
 
     @Override
