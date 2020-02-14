@@ -18,12 +18,8 @@ public class Indexer extends SubsystemBase {
         feederMotor.setInverted(true);
     }
 
-    public static Indexer getInstance() {
-        if (instance == null) {
-            synchronized (Indexer.class) {
-                instance = new Indexer();
-            }
-        }
+    public static synchronized Indexer getInstance() {
+        if (instance == null) instance = new Indexer();
         return instance;
     }
 
@@ -38,6 +34,7 @@ public class Indexer extends SubsystemBase {
     public void setFeeder(double speed) {
         feederMotor.set(speed);
     }
+    
     public void stopConveyor() {
         setConveyor(0);
     }
