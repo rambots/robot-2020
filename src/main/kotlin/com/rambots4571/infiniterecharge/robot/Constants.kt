@@ -9,6 +9,7 @@ object Constants {
 
     object Indexer {
         const val intakeMotor = 4
+        const val feederMotor = 3
         const val conveyorMotor = 1
     }
 }

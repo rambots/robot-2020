@@ -10,9 +10,12 @@ public class Indexer extends SubsystemBase {
             Constants.Indexer.intakeMotor);
     private WPI_TalonSRX conveyorMotor = new WPI_TalonSRX(
             Constants.Indexer.conveyorMotor);
+    private WPI_TalonSRX feederMotor = new WPI_TalonSRX(
+            Constants.Indexer.feederMotor);
 
     private Indexer() {
         conveyorMotor.setInverted(true);
+        feederMotor.setInverted(true);
     }
 
     public static Indexer getInstance() {
@@ -32,11 +35,18 @@ public class Indexer extends SubsystemBase {
         conveyorMotor.set(speed);
     }
 
+    public void setFeeder(double speed) {
+        feederMotor.set(speed);
+    }
     public void stopConveyor() {
         setConveyor(0);
     }
 
     public void stopIntake() {
         setIntake(0);
+    }
+
+    public void stopFeeder() {
+        setFeeder(0);
     }
 }
