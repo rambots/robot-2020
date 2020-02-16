@@ -8,6 +8,6 @@ object Constants {
     }
 
     object Arm {
-        const val wheelMotor = 0
+        const val wheelMotor = 1
     }
 }

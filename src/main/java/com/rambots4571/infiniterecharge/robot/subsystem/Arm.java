@@ -1,5 +1,6 @@
 package com.rambots4571.infiniterecharge.robot.subsystem;
 
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.rambots4571.infiniterecharge.robot.Constants;
 import com.rambots4571.infiniterecharge.robot.component.ColorTarget;
@@ -7,7 +8,7 @@ import com.revrobotics.ColorMatch;
 import com.revrobotics.ColorMatchResult;
 import com.revrobotics.ColorSensorV3;
 import edu.wpi.first.wpilibj.I2C;
-import edu.wpi.first.wpilibj.smartdashboard.SendableBuilder;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -25,6 +26,7 @@ public class Arm extends SubsystemBase {
     private Arm() {
         colorSensor = new ColorSensorV3(I2C.Port.kOnboard);
         wheelSpinner = new WPI_TalonSRX(Constants.Arm.wheelMotor);
+        wheelSpinner.setNeutralMode(NeutralMode.Brake);
         colorMatcher = new ColorMatch();
         colorMatcher.addColorMatch(blue);
         colorMatcher.addColorMatch(green);
@@ -33,23 +35,19 @@ public class Arm extends SubsystemBase {
         colorMatcher.setConfidenceThreshold(0.93);
     }
 
-    public static Arm getInstance() {
-        if (instance == null)
-            synchronized (Arm.class) {
-                instance = new Arm();
-            }
+    public static synchronized Arm getInstance() {
+        if (instance == null) instance = new Arm();
         return instance;
     }
 
     @Override
-    public void initSendable(SendableBuilder builder) {
-        super.initSendable(builder);
+    public void periodic() {
         Color color = getDetectedColor();
-        builder.addStringProperty("RGB", () -> String
+        SmartDashboard.putString("RGB", String
                 .format("rgb(%.3f, %.3f, %.3f)", color.red,
-                        color.green, color.blue), null);
-        builder.addStringProperty("Detected Color", getColor()::toString, null);
-        builder.addDoubleProperty("Confidence", this::getConfidence, null);
+                        color.green, color.blue));
+        SmartDashboard.putString("Detected Color", getColor().toString());
+        SmartDashboard.putNumber("Confidence", getConfidence());
     }
 
     public void setWheelSpinner(double power) {
