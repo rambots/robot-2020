@@ -8,7 +8,6 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 public class SpinToColor extends CommandBase {
     private Arm arm = Arm.getInstance();
     private ColorTarget target;
-    private boolean canRun = false;
 
     public SpinToColor() {
         addRequirements(arm);
@@ -32,23 +31,23 @@ public class SpinToColor extends CommandBase {
                     target = ColorTarget.Yellow;
                     break;
                 default:
-                    target = ColorTarget.Unknown;
+                    cancel();
                     break;
             }
-            if (target != ColorTarget.Unknown) canRun = true;
         } else {
             DriverStation.reportWarning("Game data not set", false);
+            cancel();
         }
     }
 
     @Override
     public void execute() {
-        arm.setWheelSpinner(1.0);
+        arm.setWheelSpinner(0.5);
     }
 
     @Override
     public boolean isFinished() {
-        return canRun == (arm.getColor() == target.getComplement());
+        return arm.getColor() == target.getComplement();
     }
 
     @Override
