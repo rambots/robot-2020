@@ -10,9 +10,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.util.Units;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
+import java.util.ArrayList;
+
 public class Shooter extends SubsystemBase {
     private static Shooter instance;
-    TalonFX shooterMotor;
+    private TalonFX shooterMotor;
+    private ArrayList<TalonFX> falcons;
 
     private Shooter() {
         shooterMotor = new TalonFX(Constants.Shooter.shooterMotor);
@@ -24,6 +27,10 @@ public class Shooter extends SubsystemBase {
         follower.follow(shooterMotor);
         follower.setNeutralMode(NeutralMode.Coast);
         follower.setInverted(InvertType.OpposeMaster);
+
+        falcons = new ArrayList<>();
+        falcons.add(shooterMotor);
+        falcons.add(follower);
     }
 
     public static synchronized Shooter getInstance() {
@@ -39,6 +46,10 @@ public class Shooter extends SubsystemBase {
 
     public double getSpeed(VelType type) {
         return type.getSpeed(shooterMotor.getSelectedSensorVelocity(0));
+    }
+
+    public ArrayList<TalonFX> getFalcons() {
+        return falcons;
     }
 
     public void setSpeed(double value, VelType type) {
