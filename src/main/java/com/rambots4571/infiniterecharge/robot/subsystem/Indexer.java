@@ -14,8 +14,8 @@ public class Indexer extends SubsystemBase {
             Constants.Indexer.feederMotor);
 
     private Indexer() {
+        intakeMotor.setInverted(true);
         conveyorMotor.setInverted(true);
-        feederMotor.setInverted(true);
     }
 
     public static synchronized Indexer getInstance() {

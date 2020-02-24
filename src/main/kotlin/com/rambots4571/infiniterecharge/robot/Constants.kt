@@ -12,4 +12,11 @@ object Constants {
         const val feederMotor = 3
         const val conveyorMotor = 1
     }
+
+    object Shooter {
+        const val shooterMotor = 5
+        const val follower = 6
+
+        const val wheelRadiusInches = 4.0
+    }
 }
