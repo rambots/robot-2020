@@ -69,7 +69,7 @@ dependencies {
     nativeZip wpi.deps.vendor.jni(wpi.platforms.roborio)
     nativeDesktopZip wpi.deps.vendor.jni(wpi.platforms.desktop)
 
-    implementation "com.rambots4571:rampage:2020.1.5"
+    implementation "com.rambots4571:rampage:2020.2.0"
 
     simulation wpi.deps.sim.gui(wpi.platforms.desktop, false)
 }
