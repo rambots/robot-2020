@@ -38,25 +38,7 @@ public class Shooter extends SubsystemBase {
     }
 
     public double getSpeed(VelType type) {
-        return type.getSpeed(getRawVel());
-    }
-
-    /**
-     * @return the velocity in ticks/100 ms
-     */
-    public double getRawVel() {
-        return shooterMotor.getSelectedSensorVelocity(0);
-    }
-
-    /**
-     * ticks        1 rev        10 100ms       360 deg         pi
-     * –––––––– * ––––––––––– * ––––––––––– * –––––––––––– * ––––––––––
-     * 100 ms     4096 ticks       1 sec         1 rev        180 deg
-     *
-     * @return the angular velocity in rad/s
-     */
-    public double getAngularVel() {
-        return getRawVel() / 4096.0 * 10.0 * 360.0 * (Math.PI / 180);
+        return type.getSpeed(shooterMotor.getSelectedSensorVelocity(0));
     }
 
     public void setSpeed(double value, VelType type) {
