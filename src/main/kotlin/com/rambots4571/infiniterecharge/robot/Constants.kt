@@ -9,5 +9,7 @@ object Constants {
 
     object Arm {
         const val wheelMotor = 1
+        const val pistonForward = 1
+        const val pistonReverse = 0
     }
 }

@@ -1,11 +1,7 @@
 package com.rambots4571.infiniterecharge.robot;
 
-import com.rambots4571.infiniterecharge.robot.command.SpinToColor;
-import com.rambots4571.infiniterecharge.robot.command.SpinWheelThreeTimes;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-
-import static com.rambots4571.infiniterecharge.robot.RobotContainer.leftStick;
 
 public class Robot extends TimedRobot {
     private RobotContainer container;
@@ -21,8 +17,6 @@ public class Robot extends TimedRobot {
 
     @Override
     public void disabledInit() {
-        CommandScheduler.getInstance().cancelAll();
-        CommandScheduler.getInstance().clearButtons();
     }
 
     @Override
@@ -41,8 +35,6 @@ public class Robot extends TimedRobot {
     @Override
     public void teleopInit() {
         container.initTeleopCommands();
-        leftStick.getButton5().whenPressed(new SpinWheelThreeTimes(), false);
-        leftStick.getButton6().whenPressed(new SpinToColor(), false);
     }
 
     @Override

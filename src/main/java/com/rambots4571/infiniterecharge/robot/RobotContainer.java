@@ -2,6 +2,7 @@ package com.rambots4571.infiniterecharge.robot;
 
 import com.rambots4571.infiniterecharge.robot.command.SpinToColor;
 import com.rambots4571.infiniterecharge.robot.command.SpinWheelThreeTimes;
+import com.rambots4571.infiniterecharge.robot.subsystem.Arm;
 import com.rambots4571.rampage.joystick.DriveStick;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
@@ -27,6 +28,7 @@ public class RobotContainer {
     private void configureButtonBindings() {
         leftStick.getButton5().whenPressed(new SpinWheelThreeTimes(), false);
         leftStick.getButton6().whenPressed(new SpinToColor(), false);
+        leftStick.getButton1().whenPressed(Arm.getInstance()::togglePiston);
     }
 
     public void initTeleopCommands() {}

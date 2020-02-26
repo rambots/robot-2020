@@ -4,9 +4,12 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.rambots4571.infiniterecharge.robot.Constants;
 import com.rambots4571.infiniterecharge.robot.component.ColorTarget;
+import com.rambots4571.rampage.hardware.DoubleSolenoid;
 import com.revrobotics.ColorMatch;
 import com.revrobotics.ColorMatchResult;
 import com.revrobotics.ColorSensorV3;
+import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.util.Color;
@@ -21,6 +24,7 @@ public class Arm extends SubsystemBase {
     private Color red = ColorMatch.makeColor(0.523, 0.341, 0.133);
     private Color yellow = ColorMatch.makeColor(0.315, 0.565, 0.119);
     private ColorMatch colorMatcher;
+    private DoubleSolenoid piston;
     private double confidence;
 
     private Arm() {
@@ -33,6 +37,10 @@ public class Arm extends SubsystemBase {
         colorMatcher.addColorMatch(red);
         colorMatcher.addColorMatch(yellow);
         colorMatcher.setConfidenceThreshold(0.93);
+
+        Compressor compressor = new Compressor();
+        piston = new DoubleSolenoid(
+                Constants.Arm.pistonForward, Constants.Arm.pistonReverse);
     }
 
     public static synchronized Arm getInstance() {
@@ -52,6 +60,18 @@ public class Arm extends SubsystemBase {
 
     public void setWheelSpinner(double power) {
         wheelSpinner.set(power);
+    }
+
+    public void pushIn() {
+        piston.set(Value.kForward);
+    }
+
+    public void pushOut() {
+        piston.set(Value.kReverse);
+    }
+
+    public void togglePiston() {
+        piston.toggle();
     }
 
     public ColorTarget getColor() {

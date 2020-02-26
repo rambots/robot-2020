@@ -2,12 +2,12 @@ package com.rambots4571.infiniterecharge.robot.command;
 
 import com.rambots4571.infiniterecharge.robot.component.ColorTarget;
 import com.rambots4571.infiniterecharge.robot.subsystem.Arm;
-import com.rambots4571.rampage.function.SwitchAction;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class SpinWheelThreeTimes extends CommandBase {
     private Arm arm = Arm.getInstance();
     private ColorTarget colorTarget;
+    private ColorTarget currentColor;
     private int counter;
 
     public SpinWheelThreeTimes() {
@@ -23,17 +23,18 @@ public class SpinWheelThreeTimes extends CommandBase {
                     "spin three times command will not run, color unknown");
             cancel();
         }
+        currentColor = colorTarget;
         // this will increase the counter every time the color sensor detects
         // the starting color
         System.out.println("initial color: " + colorTarget);
-        (new SwitchAction<>(arm::getColor)).whileActiveContinuous(() -> {
-            if (colorTarget == arm.getColor()) counter++;
-        });
         System.out.println("starting execute() \n");
     }
 
     @Override
     public void execute() {
+        ColorTarget prevColor = currentColor;
+        currentColor = arm.getColor();
+        if (prevColor != currentColor && currentColor == colorTarget) counter++;
         arm.setWheelSpinner(0.4);
         System.out.println(arm.getColor() + " counter: " + counter);
     }
