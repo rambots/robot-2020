@@ -35,6 +35,8 @@ public class Shooter extends SubsystemBase {
     public void periodic() {
         SmartDashboard.putNumber(
                 "shooter speed m/s", getSpeed(VelType.Tangential));
+        SmartDashboard.putNumber(
+                "shooter raw ticks/100ms", getSpeed(VelType.Raw));
     }
 
     public double getSpeed(VelType type) {
