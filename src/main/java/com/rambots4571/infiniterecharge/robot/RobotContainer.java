@@ -10,8 +10,6 @@ import edu.wpi.first.wpilibj.XboxController;
 public class RobotContainer {
     public static DriveStick leftStick = new DriveStick(
             Constants.Controller.leftStick);
-    public static DriveStick rightStick = new DriveStick(
-            Constants.Controller.rightStick);
 
     public RobotContainer() {
         configureButtonBindings();
@@ -28,7 +26,7 @@ public class RobotContainer {
     private void configureButtonBindings() {
         leftStick.getButton5().whenPressed(new SpinWheelThreeTimes(), false);
         leftStick.getButton6().whenPressed(new SpinToColor(), false);
-        leftStick.getButton1().whenPressed(Arm.getInstance()::togglePiston);
+        leftStick.getButton1().whenPressed(Arm.getInstance()::togglePiston, Arm.getInstance());
     }
 
     public void initTeleopCommands() {}

@@ -15,7 +15,9 @@ public class SpinToColor extends CommandBase {
 
     @Override
     public void initialize() {
+        // get the game specified message from the driver station.
         String gameData = DriverStation.getInstance().getGameSpecificMessage();
+        // set the target color based on the message.
         if (gameData.length() > 0) {
             switch (gameData.charAt(0)) {
                 case 'B':
@@ -31,10 +33,12 @@ public class SpinToColor extends CommandBase {
                     target = ColorTarget.Yellow;
                     break;
                 default:
+                    // if doesn't match the command will cancel.
                     cancel();
                     break;
             }
         } else {
+            // if there is no message the command will cancel.
             DriverStation.reportWarning("Game data not set", false);
             cancel();
         }
@@ -42,6 +46,7 @@ public class SpinToColor extends CommandBase {
 
     @Override
     public void execute() {
+        // the arm wheel will spin until isFinished() complete.
         arm.setWheelSpinner(0.5);
     }
 
@@ -52,6 +57,6 @@ public class SpinToColor extends CommandBase {
 
     @Override
     public void end(boolean interrupted) {
-        arm.setWheelSpinner(0.0);
+        arm.stopWheelSpinner();
     }
 }

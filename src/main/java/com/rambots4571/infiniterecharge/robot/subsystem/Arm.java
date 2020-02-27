@@ -15,16 +15,25 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
+/**
+ * Subsystem that is used to spin the control panel.
+ * - {@link DoubleSolenoid} used to actuate the arm up in down.
+ * - {@link ColorSensorV3} used to detect the colors.
+ * - {@link WPI_TalonSRX} used to control the motor what spins the wheel.
+ */
 public class Arm extends SubsystemBase {
     private static Arm instance;
     private WPI_TalonSRX wheelSpinner;
     private ColorSensorV3 colorSensor;
+    private DoubleSolenoid piston;
+    /**
+     * store raw RGB values to compare later using {@link ColorMatch}.
+     */
     private Color blue = ColorMatch.makeColor(0.112, 0.426, 0.457);
     private Color green = ColorMatch.makeColor(0.159, 0.589, 0.252);
     private Color red = ColorMatch.makeColor(0.523, 0.341, 0.133);
     private Color yellow = ColorMatch.makeColor(0.315, 0.565, 0.119);
     private ColorMatch colorMatcher;
-    private DoubleSolenoid piston;
     private double confidence;
 
     private Arm() {
@@ -38,7 +47,7 @@ public class Arm extends SubsystemBase {
         colorMatcher.addColorMatch(yellow);
         colorMatcher.setConfidenceThreshold(0.93);
 
-        Compressor compressor = new Compressor();
+        new Compressor();
         piston = new DoubleSolenoid(
                 Constants.Arm.pistonForward, Constants.Arm.pistonReverse);
     }
@@ -62,6 +71,10 @@ public class Arm extends SubsystemBase {
         wheelSpinner.set(power);
     }
 
+    public void stopWheelSpinner() {
+        setWheelSpinner(0);
+    }
+
     public void pushIn() {
         piston.set(Value.kForward);
     }
@@ -74,6 +87,11 @@ public class Arm extends SubsystemBase {
         piston.toggle();
     }
 
+    /**
+     * Used to get the color it detects in an enum form.
+     *
+     * @return the color {@link ColorTarget}.
+     */
     public ColorTarget getColor() {
         ColorMatchResult match = colorMatcher.matchColor(getDetectedColor());
         if (match == null) return ColorTarget.Unknown;
@@ -85,6 +103,9 @@ public class Arm extends SubsystemBase {
         else return ColorTarget.Unknown;
     }
 
+    /**
+     * @return the raw color.
+     */
     public Color getDetectedColor() {
         return colorSensor.getColor();
     }

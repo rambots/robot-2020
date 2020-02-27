@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class SpinWheelThreeTimes extends CommandBase {
     private Arm arm = Arm.getInstance();
-    private ColorTarget colorTarget;
+    private ColorTarget initialColor;
     private ColorTarget currentColor;
     private int counter;
 
@@ -17,36 +17,34 @@ public class SpinWheelThreeTimes extends CommandBase {
     @Override
     public void initialize() {
         // storing the color the arm first sees
-        colorTarget = arm.getColor();
-        if (colorTarget == ColorTarget.Unknown) {
+        initialColor = arm.getColor();
+        // if the color is unknown, the command will cancel.
+        if (initialColor == ColorTarget.Unknown) {
             System.out.println(
                     "spin three times command will not run, color unknown");
             cancel();
         }
-        currentColor = colorTarget;
-        // this will increase the counter every time the color sensor detects
-        // the starting color
-        System.out.println("initial color: " + colorTarget);
-        System.out.println("starting execute() \n");
+        currentColor = initialColor;
     }
 
     @Override
     public void execute() {
         ColorTarget prevColor = currentColor;
         currentColor = arm.getColor();
-        if (prevColor != currentColor && currentColor == colorTarget) counter++;
+        // when the color changes, and it is the same color as the initial
+        // color, increment counter.
+        if (prevColor != currentColor && currentColor == initialColor) counter++;
         arm.setWheelSpinner(0.4);
-        System.out.println(arm.getColor() + " counter: " + counter);
     }
 
     @Override
     public boolean isFinished() {
-        // automatically stop the arm once the counter hits 7
+        // stop the arm once the counter hits 7 (3.5 revolutions)
         return counter == 7;
     }
 
     @Override
     public void end(boolean interrupted) {
-        arm.setWheelSpinner(0.0);
+        arm.stopWheelSpinner();
     }
 }
