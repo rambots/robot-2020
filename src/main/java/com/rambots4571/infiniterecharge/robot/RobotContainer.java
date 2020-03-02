@@ -40,5 +40,6 @@ public class RobotContainer {
         (new RunCommand(() -> Shooter.getInstance().setPower(
                 RobotContainer.leftStick.getRawAxis(3)), Shooter.getInstance()))
                 .schedule();
+        //        (new IndexCommand()).schedule();
     }
 }

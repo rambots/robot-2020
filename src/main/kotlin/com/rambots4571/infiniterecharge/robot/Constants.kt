@@ -11,6 +11,10 @@ object Constants {
         const val intakeMotor = 4
         const val feederMotor = 3
         const val conveyorMotor = 1
+
+        const val intakeSensor = 0
+        const val conveyorSensor = 1
+        const val topSensor = 2
     }
 
     object Shooter {
