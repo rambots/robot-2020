@@ -14,9 +14,7 @@ public class Indexer extends SubsystemBase {
     private DigitalInput intakeSensor;
     private DigitalInput conveyorSensor;
     private DigitalInput topSensor;
-    private boolean currentIntake;
     private boolean currentChamber;
-    private boolean currentTop;
 
     private Indexer() {
         intakeMotor = new WPI_TalonSRX(
@@ -31,13 +29,13 @@ public class Indexer extends SubsystemBase {
         conveyorMotor.setInverted(true);
 
         intakeSensor = new DigitalInput(Constants.Indexer.intakeSensor);
-        currentIntake = isCellInIntake();
+        boolean currentIntake = isCellInIntake();
 
         conveyorSensor = new DigitalInput(Constants.Indexer.conveyorSensor);
         currentChamber = isCellInChamber();
 
         topSensor = new DigitalInput(Constants.Indexer.topSensor);
-        currentTop = isCellInTop();
+        boolean currentTop = isCellInTop();
     }
 
     @Override
@@ -86,27 +84,12 @@ public class Indexer extends SubsystemBase {
         return !topSensor.get();
     }
 
-    public boolean didBallEnterIntake() {
-        boolean prev = currentIntake;
-        currentIntake = isCellInIntake();
-        return !prev && currentIntake;
-    }
-
-    public boolean didBallReachChamber() {
+    /**
+     * @return true the moment the sensor goes false->true
+     */
+    public boolean didCellReachChamber() {
         boolean prev = currentChamber;
         currentChamber = isCellInChamber();
         return !prev && currentChamber;
-    }
-
-    public boolean didCellLeaveChamber() {
-        boolean prev = currentChamber;
-        currentChamber = isCellInChamber();
-        return prev && !currentChamber;
-    }
-
-    public boolean didBallReachTop() {
-        boolean prev = currentTop;
-        currentTop = isCellInTop();
-        return !prev && currentTop;
     }
 }
