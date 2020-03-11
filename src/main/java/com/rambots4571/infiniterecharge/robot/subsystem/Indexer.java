@@ -29,13 +29,11 @@ public class Indexer extends SubsystemBase {
         conveyorMotor.setInverted(true);
 
         intakeSensor = new DigitalInput(Constants.Indexer.intakeSensor);
-        boolean currentIntake = isCellInIntake();
 
         conveyorSensor = new DigitalInput(Constants.Indexer.conveyorSensor);
         currentChamber = isCellInChamber();
 
         topSensor = new DigitalInput(Constants.Indexer.topSensor);
-        boolean currentTop = isCellInTop();
     }
 
     @Override

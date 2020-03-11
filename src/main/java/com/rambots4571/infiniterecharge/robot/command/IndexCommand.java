@@ -13,6 +13,8 @@ public class IndexCommand extends CommandBase {
 
     @Override
     public void initialize() {
+        // poll to update value
+        indexer.didCellReachChamber();
     }
 
     @Override
