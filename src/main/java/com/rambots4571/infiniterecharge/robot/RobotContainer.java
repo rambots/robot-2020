@@ -1,11 +1,9 @@
 package com.rambots4571.infiniterecharge.robot;
 
 import com.rambots4571.infiniterecharge.robot.subsystem.Indexer;
-import com.rambots4571.infiniterecharge.robot.subsystem.Shooter;
 import com.rambots4571.rampage.joystick.DriveStick;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj2.command.RunCommand;
 
 public class RobotContainer {
     public static DriveStick leftStick = new DriveStick(
@@ -37,9 +35,5 @@ public class RobotContainer {
     }
 
     public void initTeleopCommands() {
-        (new RunCommand(() -> Shooter.getInstance().setPower(
-                RobotContainer.leftStick.getRawAxis(3)), Shooter.getInstance()))
-                .schedule();
-        //        (new IndexCommand()).schedule();
     }
 }
