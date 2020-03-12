@@ -12,7 +12,7 @@ public class Indexer extends SubsystemBase {
     private WPI_TalonSRX conveyorMotor;
     private WPI_TalonSRX feederMotor;
     private DigitalInput intakeSensor;
-    private DigitalInput conveyorSensor;
+    private DigitalInput chamberSensor;
     private DigitalInput topSensor;
     private boolean currentChamber;
 
@@ -30,7 +30,7 @@ public class Indexer extends SubsystemBase {
 
         intakeSensor = new DigitalInput(Constants.Indexer.intakeSensor);
 
-        conveyorSensor = new DigitalInput(Constants.Indexer.conveyorSensor);
+        chamberSensor = new DigitalInput(Constants.Indexer.chamberSensor);
         currentChamber = isCellInChamber();
 
         topSensor = new DigitalInput(Constants.Indexer.topSensor);
@@ -38,7 +38,9 @@ public class Indexer extends SubsystemBase {
 
     @Override
     public void periodic() {
-        SmartDashboard.putBoolean("IR Sensor", isCellInIntake());
+        SmartDashboard.putBoolean("intake Sensor", isCellInIntake());
+        SmartDashboard.putBoolean("chamber sensor", isCellInChamber());
+        SmartDashboard.putBoolean("top sensor", isCellInTop());
     }
 
     public static synchronized Indexer getInstance() {
@@ -75,7 +77,7 @@ public class Indexer extends SubsystemBase {
     }
 
     public boolean isCellInChamber() {
-        return !conveyorSensor.get();
+        return !chamberSensor.get();
     }
 
     public boolean isCellInTop() {

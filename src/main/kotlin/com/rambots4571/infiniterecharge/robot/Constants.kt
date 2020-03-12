@@ -13,7 +13,7 @@ object Constants {
         const val conveyorMotor = 1
 
         const val intakeSensor = 0
-        const val conveyorSensor = 1
+        const val chamberSensor = 1
         const val topSensor = 2
     }
 
