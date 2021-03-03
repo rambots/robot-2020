@@ -17,8 +17,8 @@ apply plugin: 'idea'
 apply plugin: 'kotlin'
 apply plugin: 'edu.wpi.first.GradleRIO'
 
-sourceCompatibility = 11
-targetCompatibility = 11
+sourceCompatibility = JavaVersion.VERSION_11
+targetCompatibility = JavaVersion.VERSION_11
 
 deploy {
     targets {
