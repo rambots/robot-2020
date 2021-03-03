@@ -23,17 +23,17 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
  */
 public class Arm extends SubsystemBase {
     private static Arm instance;
-    private WPI_TalonSRX wheelSpinner;
-    private ColorSensorV3 colorSensor;
-    private DoubleSolenoid piston;
+    private final WPI_TalonSRX wheelSpinner;
+    private final ColorSensorV3 colorSensor;
+    private final DoubleSolenoid piston;
     /**
      * store raw RGB values to compare later using {@link ColorMatch}.
      */
-    private Color blue = ColorMatch.makeColor(0.112, 0.426, 0.457);
-    private Color green = ColorMatch.makeColor(0.159, 0.589, 0.252);
-    private Color red = ColorMatch.makeColor(0.523, 0.341, 0.133);
-    private Color yellow = ColorMatch.makeColor(0.315, 0.565, 0.119);
-    private ColorMatch colorMatcher;
+    private final Color blue = ColorMatch.makeColor(0.112, 0.426, 0.457);
+    private final Color green = ColorMatch.makeColor(0.159, 0.589, 0.252);
+    private final Color red = ColorMatch.makeColor(0.523, 0.341, 0.133);
+    private final Color yellow = ColorMatch.makeColor(0.315, 0.565, 0.119);
+    private final ColorMatch colorMatcher;
     private double confidence;
 
     private Arm() {
@@ -41,6 +41,7 @@ public class Arm extends SubsystemBase {
         wheelSpinner = new WPI_TalonSRX(Constants.Arm.wheelMotor);
         wheelSpinner.setNeutralMode(NeutralMode.Brake);
         colorMatcher = new ColorMatch();
+        // adding the colors the sensor should look for
         colorMatcher.addColorMatch(blue);
         colorMatcher.addColorMatch(green);
         colorMatcher.addColorMatch(red);
@@ -59,7 +60,7 @@ public class Arm extends SubsystemBase {
 
     @Override
     public void periodic() {
-        Color color = getDetectedColor();
+        Color color = getRawColor();
         SmartDashboard.putString("RGB", String
                 .format("rgb(%.3f, %.3f, %.3f)", color.red,
                         color.green, color.blue));
@@ -93,7 +94,7 @@ public class Arm extends SubsystemBase {
      * @return the color {@link ColorTarget}.
      */
     public ColorTarget getColor() {
-        ColorMatchResult match = colorMatcher.matchColor(getDetectedColor());
+        ColorMatchResult match = colorMatcher.matchColor(getRawColor());
         if (match == null) return ColorTarget.Unknown;
         confidence = match.confidence;
         if (match.color == blue) return ColorTarget.Blue;
@@ -106,7 +107,7 @@ public class Arm extends SubsystemBase {
     /**
      * @return the raw color.
      */
-    public Color getDetectedColor() {
+    public Color getRawColor() {
         return colorSensor.getColor();
     }
 

@@ -14,7 +14,7 @@ public class ReadColors extends CommandBase {
 
     @Override
     public void execute() {
-        Color color = arm.getDetectedColor();
+        Color color = arm.getRawColor();
         SmartDashboard.putString(
                 "raw rgb", String.format("rgb(%.3f, %.3f, %.3f)", color.red,
                                          color.green, color.blue));
